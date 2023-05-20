@@ -1,0 +1,31 @@
+.backDrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.modalCentered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modalView {
+    width: 450px;
+    background-color: white;
+    border-radius: 1em;
+}

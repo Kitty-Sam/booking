@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+    height: 100vh;
+    background-color: aliceblue;
+    margin-top: 1em;
+    padding: 2em;
+}
