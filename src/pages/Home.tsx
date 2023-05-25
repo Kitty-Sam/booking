@@ -6,10 +6,17 @@ import { addCurrentRestaurant } from '@store/redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '@styles/Main.module.css';
+// import { persistor } from '@store/configureStore';
+// import { useEffect } from 'react';
 
 export const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     persistor.purge();
+    // });
+
     const onRestaurantPress = (title: string) => () => {
         dispatch(addCurrentRestaurant({ currentRestaurant: title }));
         navigate('/booking');
@@ -24,10 +31,10 @@ export const Home = () => {
                     <div
                         key={restaurant.title}
                         onClick={onRestaurantPress(restaurant.title)}
-                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}
+                        className={styles.restaurantItem}
                     >
-                        <div>{restaurant.title}</div>
-                        <img src={restaurant.img} alt="place" style={{ width: 100, height: 100, borderRadius: 25 }} />
+                        <Typography variant="h6">{restaurant.title}</Typography>
+                        <img src={restaurant.img} alt="place" className={styles.restaurantImg} />
                     </div>
                 ))}
             </div>

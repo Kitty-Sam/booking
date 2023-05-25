@@ -1,10 +1,10 @@
-import stylesButton from '@styles/ProgressSteps.module.css';
 import { FC } from 'react';
 import { addNewOrder } from '@store/redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { IControlBar } from '@components/interfaces';
 import { themeColors } from '@constants/themeColors';
+import { Button } from '@mui/material';
 
 export const ControlBar: FC<IControlBar> = ({
     activeStep,
@@ -31,20 +31,25 @@ export const ControlBar: FC<IControlBar> = ({
 
     return (
         <>
-            <button
+            <Button
                 onClick={prevStep}
                 disabled={activeStep === 1}
-                className={stylesButton.button}
                 style={{
-                    backgroundColor: activeStep >= compareValue ? themeColors.lightWhite : themeColors.white,
+                    backgroundColor: themeColors.lightWhite,
                     color: activeStep >= compareValue ? themeColors.black : themeColors.white,
                 }}
             >
                 {prevLabel}
-            </button>
-            <button onClick={nextLabel === 'Book' ? onBookPress : nextStep} className={stylesButton.button}>
+            </Button>
+            <Button
+                onClick={nextLabel === 'Book' ? onBookPress : nextStep}
+                style={{
+                    backgroundColor: activeStep >= compareValue ? themeColors.violet : themeColors.white,
+                    color: themeColors.white,
+                }}
+            >
                 {nextLabel}
-            </button>
+            </Button>
         </>
     );
 };

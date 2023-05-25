@@ -8,7 +8,7 @@ import { tables } from '@constants/tables';
 import stylesTable from '@styles/Tables.module.css';
 import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getIsLogged } from '@store/redux/selectors';
+import { getCurrentRestaurant, getIsLogged } from '@store/redux/selectors';
 import { themeColors } from '@constants/themeColors';
 
 import styles from '@styles/Main.module.css';
@@ -20,6 +20,7 @@ export const Booking = () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date());
 
     const isLoggedIn = useSelector(getIsLogged);
+    const currentRestaurant = useSelector(getCurrentRestaurant);
 
     const payload = {
         id: Date.now().toString(),
@@ -39,124 +40,125 @@ export const Booking = () => {
                 ) : (
                     <>
                         <ProgressSteps activeStep={activeStep} setActiveStep={setActiveStep} />
-                        <div className={styles.mainBlock}>
-                            {activeStep === 1 && (
-                                <>
-                                    <Typography variant="h4" className={styles.typographyGap}>
-                                        Choose the Date
-                                    </Typography>
-                                    <CustomDatePicker
-                                        startDate={startDate}
-                                        setStartDate={setStartDate}
-                                        isTime={false}
-                                    />
-                                    <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
-                                        <ControlBar
-                                            setActiveStep={setActiveStep}
-                                            activeStep={activeStep}
-                                            compareValue={1}
-                                            prevLabel={'Previous'}
-                                            nextLabel={'Next'}
-                                            filters={payload}
+                        {!currentRestaurant ? (
+                            <Typography variant="h4">Choose Restaurant name first</Typography>
+                        ) : (
+                            <div className={styles.mainBlock}>
+                                {activeStep === 1 && (
+                                    <>
+                                        <Typography variant="h4">Choose the Date</Typography>
+                                        <CustomDatePicker
+                                            startDate={startDate}
+                                            setStartDate={setStartDate}
+                                            isTime={false}
                                         />
-                                    </div>
-                                </>
-                            )}
-                            {activeStep === 2 && (
-                                <>
-                                    <Typography variant="h4" className={styles.typographyGap}>
-                                        Choose the Time
-                                    </Typography>
-                                    <CustomDatePicker startDate={startDate} setStartDate={setStartDate} isTime={true} />
-                                    <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
-                                        <ControlBar
-                                            setActiveStep={setActiveStep}
-                                            activeStep={activeStep}
-                                            compareValue={2}
-                                            prevLabel={'Previous'}
-                                            nextLabel={'Next'}
-                                            filters={payload}
+                                        <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
+                                            <ControlBar
+                                                setActiveStep={setActiveStep}
+                                                activeStep={activeStep}
+                                                compareValue={1}
+                                                prevLabel={'Previous'}
+                                                nextLabel={'Next'}
+                                                filters={payload}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                                {activeStep === 2 && (
+                                    <>
+                                        <Typography variant="h4">Choose the Time</Typography>
+                                        <CustomDatePicker
+                                            startDate={startDate}
+                                            setStartDate={setStartDate}
+                                            isTime={true}
                                         />
-                                    </div>
-                                </>
-                            )}
+                                        <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
+                                            <ControlBar
+                                                setActiveStep={setActiveStep}
+                                                activeStep={activeStep}
+                                                compareValue={2}
+                                                prevLabel={'Previous'}
+                                                nextLabel={'Next'}
+                                                filters={payload}
+                                            />
+                                        </div>
+                                    </>
+                                )}
 
-                            {activeStep === 3 && (
-                                <>
-                                    <Typography variant="h4" className={styles.typographyGap}>
-                                        Enter Guests number
-                                    </Typography>
-                                    <div className={styles.tablesWrapper}>
-                                        {tables.map((table) => {
-                                            const array = new Array(table.capacity).fill('available');
-                                            const seats = array.fill('reserved', 3);
+                                {activeStep === 3 && (
+                                    <>
+                                        <Typography variant="h4">Enter Guests number</Typography>
+                                        <div className={styles.tablesWrapper}>
+                                            {tables.map((table) => {
+                                                const array = new Array(table.capacity).fill('available');
+                                                const seats = array.fill('reserved', 3);
 
-                                            return (
-                                                <div key={table.id}>
-                                                    <div>№ {table.id}</div>
-                                                    <div className={stylesTable.table}>
-                                                        {seats.map((seat, index) => (
-                                                            <div
-                                                                key={index}
-                                                                className={styles.placeWrapper}
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        seat === 'reserved'
-                                                                            ? themeColors.grey
-                                                                            : 'inherit',
-                                                                }}
-                                                            />
-                                                        ))}
+                                                return (
+                                                    <div key={table.id}>
+                                                        <div>№ {table.id}</div>
+                                                        <div className={stylesTable.table}>
+                                                            {seats.map((seat, index) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className={styles.placeWrapper}
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            seat === 'reserved'
+                                                                                ? themeColors.grey
+                                                                                : 'inherit',
+                                                                    }}
+                                                                />
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                    <div className={styles.historyWrapper}>
-                                        <div className={styles.history} />
-                                        <div>Reserved</div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className={styles.historyWrapper}>
+                                            <div className={styles.history} />
+                                            <Typography variant="h6">Reserved</Typography>
 
-                                        <div className={styles.historyWhite} />
-                                        <div>Available</div>
-                                    </div>
+                                            <div className={styles.historyWhite} />
+                                            <Typography variant="h6">Available</Typography>
+                                        </div>
 
-                                    <TextField
-                                        id="outlined-controlled"
-                                        label="Guests number"
-                                        value={quests}
-                                        style={{ marginBottom: 30 }}
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                            setGuests(event.target.value);
-                                        }}
-                                    />
-
-                                    <TextField
-                                        id="outlined-controlled"
-                                        label="Table number"
-                                        value={table}
-                                        style={{ marginBottom: 30 }}
-                                        className={styles.inputGap}
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                            setTable(event.target.value);
-                                        }}
-                                    />
-                                    <div className={styles.bookBlock}>
-                                        <ControlBar
-                                            setActiveStep={setActiveStep}
-                                            activeStep={activeStep}
-                                            compareValue={3}
-                                            prevLabel={'Previous'}
-                                            nextLabel={'Book'}
-                                            filters={payload}
+                                        <TextField
+                                            id="outlined-controlled"
+                                            label="Guests number"
+                                            value={quests}
+                                            style={{ marginBottom: 30 }}
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                setGuests(event.target.value);
+                                            }}
                                         />
-                                    </div>
-                                </>
-                            )}
-                        </div>
+
+                                        <TextField
+                                            id="outlined-controlled"
+                                            label="Table number"
+                                            value={table}
+                                            style={{ marginBottom: 30 }}
+                                            className={styles.inputGap}
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                                setTable(event.target.value);
+                                            }}
+                                        />
+                                        <div className={styles.bookBlock}>
+                                            <ControlBar
+                                                setActiveStep={setActiveStep}
+                                                activeStep={activeStep}
+                                                compareValue={3}
+                                                prevLabel={'Previous'}
+                                                nextLabel={'Book'}
+                                                filters={payload}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
                     </>
                 )}
             </div>
-            );
         </>
     );
 };

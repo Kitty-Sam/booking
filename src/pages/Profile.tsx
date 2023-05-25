@@ -19,7 +19,6 @@ export const Profile = () => {
                     <Typography variant="h4">Hear is going to be your booked tables</Typography>
                 ) : (
                     <>
-                        <div>{orders.length}</div>
                         <Typography variant="h4">Current booking</Typography>
                         <Slider orders={orders} date={date} />
                     </>
