@@ -21,16 +21,18 @@ export const Home = () => {
             <Header />
             <div className={styles.wrapper}>
                 <Typography variant="h4">Choose your restaurant</Typography>
-                {restaurants.map((restaurant) => (
-                    <div
-                        key={restaurant.title}
-                        onClick={onRestaurantPress(restaurant.title)}
-                        className={styles.restaurantItem}
-                    >
-                        <Typography variant="h6">{restaurant.title}</Typography>
-                        <img src={restaurant.img} alt="place" className={styles.restaurantImg} />
-                    </div>
-                ))}
+                <div className={styles.restaurantWrapper}>
+                    {restaurants.map((restaurant) => (
+                        <div
+                            key={restaurant.title}
+                            onClick={onRestaurantPress(restaurant.title)}
+                            className={styles.restaurantItem}
+                        >
+                            <Typography variant="h6">{restaurant.title}</Typography>
+                            <img src={restaurant.img} alt="place" className={styles.restaurantImg} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );
