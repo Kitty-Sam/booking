@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, InputAdornment, TextField } from '@mui/material';
 import { setCurrentUser, setIsLoggedUser, setModal } from '@store/redux/actions/actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from '@styles/Login.module.css';
@@ -10,14 +10,21 @@ import { IUser } from '@store/redux/reducers/userReducer';
 import { themeColors } from '@constants/themeColors';
 import { useFormik } from 'formik';
 import { loginSchema } from '@constants/validationSchema';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
 
 export const Login = () => {
+    const [isVisible, setIsVisible] = useState(false);
     const allUsers = useSelector(getAllUsers, shallowEqual);
 
     const dispatch = useDispatch();
 
     const onCancelPress = () => {
         dispatch(setModal({ modal: null }));
+    };
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
     };
 
     const formik = useFormik({
@@ -68,6 +75,17 @@ export const Login = () => {
                     onChange={formik.handleChange}
                     style={{ marginTop: 20 }}
                     helperText={formik.errors.password}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                {isVisible ? (
+                                    <Visibility onClick={toggleVisibility} />
+                                ) : (
+                                    <VisibilityOff onClick={toggleVisibility} />
+                                )}
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <div className={styles.buttonsWrapper}>
