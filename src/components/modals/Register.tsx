@@ -1,5 +1,5 @@
 import { Button, InputAdornment, TextField } from '@mui/material';
-import { addNewUser, setModal } from '@store/redux/actions/actions';
+import { addNewUser, fetchOrders, setModal } from '@store/redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '@styles/Login.module.css';
 import { getAllUsers } from '@store/redux/selectors';
@@ -44,6 +44,7 @@ export const Register = () => {
                 // @ts-ignore
                 toast.success('Success! Now login, please', successOptions);
                 dispatch(setModal({ modal: null }));
+                dispatch(fetchOrders({ orders: [] }));
             }
         },
         validationSchema: registerSchema,
