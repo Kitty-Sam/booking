@@ -1,0 +1,17 @@
+.tables-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.table {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+

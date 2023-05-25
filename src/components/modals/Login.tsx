@@ -7,6 +7,8 @@ import { getAllUsers } from '@store/redux/selectors';
 import { toast } from 'react-toastify';
 
 import { errorOptions, successOptions } from '@constants/toastOptions';
+import { IUser } from '@store/redux/reducers/userReducer';
+import { themeColors } from '@constants/themeColors';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,12 +16,13 @@ export const Login = () => {
 
     const allUsers = useSelector(getAllUsers, shallowEqual);
 
-    const currentUser = allUsers.find((user) => user.email === email);
+    const currentUser = allUsers.find((user: IUser) => user.email === email);
 
     const dispatch = useDispatch();
 
     const onLoginPress = () => {
         if (!currentUser) {
+            // @ts-ignore
             toast.info('Register first!', errorOptions);
             return;
         }
@@ -27,9 +30,11 @@ export const Login = () => {
             dispatch(setIsLoggedUser({ isLogged: true }));
             dispatch(setCurrentUser({ currentUser }));
             dispatch(setModal({ modal: null }));
+            // @ts-ignore
             toast.success('Success!', successOptions);
             return;
         }
+        // @ts-ignore
         toast.error('Check your credentials!', errorOptions);
     };
 
@@ -64,7 +69,7 @@ export const Login = () => {
                 <Button variant="contained" onClick={onCancelPress} color="error">
                     Cancel
                 </Button>
-                <Button variant="contained" onClick={onLoginPress}>
+                <Button variant="contained" onClick={onLoginPress} style={{ backgroundColor: themeColors.violet }}>
                     Login
                 </Button>
             </div>

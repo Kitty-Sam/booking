@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -15,8 +16,10 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "moment": "^2.29.4",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
+    "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
     "react-overlays": "^5.2.1",
     "react-redux": "^8.0.5",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@types/node": "^20.2.1",
     "@types/react": "^18.0.28",
+    "@types/react-datepicker": "^4.11.2",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",

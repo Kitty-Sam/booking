@@ -1,13 +1,8 @@
-.menuButton {
-    /*margin-right: 8px;*/
-}
-
 .title {
     flex-grow: 1;
-    padding: 1rem;
-    color: blue;
+    padding: 1.5rem;
 }
 
 .drawer {
-    width: 200px;
+    width: 250px;
 }

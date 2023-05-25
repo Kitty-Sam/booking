@@ -5,7 +5,6 @@ export const Booking = () => {
     return (
         <>
             <Header />
-            <div>Booking</div>
             <MainPanel />
         </>
     );

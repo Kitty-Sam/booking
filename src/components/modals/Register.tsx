@@ -7,6 +7,8 @@ import { getAllUsers } from '@store/redux/selectors';
 import { toast } from 'react-toastify';
 
 import { errorOptions, successOptions } from '@constants/toastOptions';
+import { IUser } from '@store/redux/reducers/userReducer';
+import { themeColors } from '@constants/themeColors';
 
 export const Register = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +18,7 @@ export const Register = () => {
     const dispatch = useDispatch();
 
     const allUsers = useSelector(getAllUsers);
-    const currentUser = allUsers.find((user) => user.email === email);
+    const currentUser = allUsers.find((user: IUser) => user.email === email);
 
     const onRegisterPress = () => {
         if (currentUser) {
@@ -79,7 +81,7 @@ export const Register = () => {
                 <Button variant="contained" onClick={onCancelPress} color="error">
                     Cancel
                 </Button>
-                <Button variant="contained" onClick={onRegisterPress}>
+                <Button variant="contained" onClick={onRegisterPress} style={{ backgroundColor: themeColors.violet }}>
                     Register
                 </Button>
             </div>

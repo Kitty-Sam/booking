@@ -2,12 +2,9 @@ import { useState } from 'react';
 import styles from '@styles/Menu.module.css';
 import { AppBar, IconButton, Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { menuItems } from '@constants/menuItems';
+import { themeColors } from '@constants/themeColors';
 
-const menuItems = [
-    { text: '1. Home', link: '/' },
-    { text: '2. Profile', link: '/profile' },
-    { text: '3. Booking', link: '/booking' },
-];
 export const Menu = () => {
     const [open, setOpen] = useState(false);
 
@@ -19,8 +16,8 @@ export const Menu = () => {
     };
 
     return (
-        <div>
-            <AppBar position="static">
+        <div className={styles.root}>
+            <AppBar position="static" style={{ backgroundColor: themeColors.violet }}>
                 <IconButton color="inherit" onClick={toggleDrawer(true)}>
                     <MenuIcon />
                 </IconButton>
@@ -32,7 +29,7 @@ export const Menu = () => {
                     </Typography>
                     <List>
                         {menuItems.map((item, index) => (
-                            <ListItem key={index} component="a" href={item.link}>
+                            <ListItem button key={index} component="a" href={item.link}>
                                 <ListItemText primary={item.text} />
                             </ListItem>
                         ))}

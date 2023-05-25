@@ -1,10 +1,12 @@
+@import "colors.css";
+
 .wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 1280px;
-    background-color: aliceblue;
+    min-width: 1280px;
+    background-color: var(--primary-blue-color);
     border-radius: 1rem;
     padding: 2em;
 }
@@ -16,6 +18,4 @@
     justify-content: space-between;
 }
 
-.email {
 
-}

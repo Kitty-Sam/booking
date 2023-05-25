@@ -1,13 +1,9 @@
 import { FC } from 'react';
 import { Modal } from 'react-overlays';
 import styles from '@styles/CustomModal.module.css';
+import { ICustomModalProps } from '@components/modals/interfaces';
 
-export interface ICustomModal {
-    open: boolean;
-    children: any;
-}
-
-export const CustomModal: FC<ICustomModal> = ({ open, children }) => {
+export const CustomModal: FC<ICustomModalProps> = ({ open, children }) => {
     const renderBackdrop = (props: any) => <div className={styles.backDrop} {...props} />;
 
     return (

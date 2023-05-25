@@ -1,5 +1,7 @@
+import { ToastPosition } from 'react-toastify';
+
 export const errorOptions = {
-    position: 'top-center',
+    position: 'top-center' as ToastPosition | undefined,
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -10,7 +12,7 @@ export const errorOptions = {
 };
 
 export const successOptions = {
-    position: 'top-center',
+    position: 'top-center' as ToastPosition | undefined,
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,

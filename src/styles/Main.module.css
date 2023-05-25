@@ -1,11 +1,80 @@
+@import "colors.css";
+
 .wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    width: 1280px;
-    height: 100vh;
-    background-color: aliceblue;
+    min-width: 1280px;
+    height: 700px;
+    background-color: var(--primary-blue-color);
     margin-top: 1em;
     padding: 2em;
+}
+
+/*booking*/
+
+.mainBlock {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: flex-start
+}
+
+.typographyGap {
+    margin-bottom: 30px
+}
+
+.controlBarGap {
+    margin-top: 350px
+}
+
+.tablesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px
+}
+
+.placeWrapper {
+    width: 100px;
+    height: 100px;
+    border-color: #000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+
+.history {
+    width: 25px;
+    height: 25px;
+    border-color: var(--primary-black-color);
+    border-width: 1px;
+    border-style: solid;
+    background-color: var(--primary-grey-color);
+    margin: 10px;
+}
+.historyWhite {
+    width: 25px;
+    height: 25px;
+    border-color: var(--primary-black-color);
+    border-width: 1px;
+    border-style: solid;
+    background-color: var(--primary-white-color);
+    margin: 10px;
+}
+
+.historyWrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 20px
+}
+
+.inputGap {
+    margin-bottom: 50px;
+}
+
+.bookBlock {
+    width: 400px;
+    justify-content: space-between;
+    display: flex;
 }

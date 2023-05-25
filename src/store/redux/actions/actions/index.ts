@@ -1,5 +1,8 @@
 import {
+    AddCurrentResPayload,
+    AddNewOrderPayload,
     AddNewUserPayload,
+    RemoveOrderPayload,
     RemoveUserPayload,
     SetCurrentUserPayload,
     SetIsLoggedPayload,
@@ -28,5 +31,20 @@ export const addNewUser = (payload: AddNewUserPayload) => ({
 });
 export const removeUser = (payload: RemoveUserPayload) => ({
     type: UserActions.REMOVE_USER,
+    payload,
+});
+
+export const addNewOrder = (payload: AddNewOrderPayload) => ({
+    type: UserActions.ADD_NEW_ORDER,
+    payload,
+});
+
+export const addCurrentRestaurant = (payload: AddCurrentResPayload) => ({
+    type: UserActions.ADD_CURRENT_RESTAURANT,
+    payload,
+});
+
+export const removeOrder = (payload: RemoveOrderPayload) => ({
+    type: UserActions.REMOVE_ORDER,
     payload,
 });

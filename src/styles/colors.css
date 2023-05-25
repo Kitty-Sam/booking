@@ -1,0 +1,10 @@
+:root {
+    --primary-white-color: #fff;
+    --primary-black-color: #000;
+    --primary-blue-color: aliceblue;
+    --primary-grey-color: grey;
+    --primary-violet-color: #4a154b;
+
+    --datePicker-background-color:  #969eac;
+    --hover-color:  #f3e7f3;
+}

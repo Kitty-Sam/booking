@@ -49,4 +49,42 @@ export type RemoveUser = {
     payload: RemoveUserPayload;
 };
 
-export type ActionsType = SetModal | SetCurrentUser | SetIsLoggedUser | AddNewUser | RemoveUser;
+export interface AddNewOrderPayload {
+    id: string;
+    quests: number;
+    dateAndTime: string | undefined;
+    tableNumber: number;
+}
+
+export type AddNewOrder = {
+    type: typeof UserActions.ADD_NEW_ORDER;
+    payload: AddNewOrderPayload;
+};
+
+export interface AddCurrentResPayload {
+    currentRestaurant: string;
+}
+
+export type AddCurrentRes = {
+    type: typeof UserActions.ADD_CURRENT_RESTAURANT;
+    payload: AddCurrentResPayload;
+};
+
+export interface RemoveOrderPayload {
+    id: string;
+}
+
+export type RemoveOrder = {
+    type: typeof UserActions.REMOVE_ORDER;
+    payload: RemoveOrderPayload;
+};
+
+export type ActionsType =
+    | SetModal
+    | SetCurrentUser
+    | SetIsLoggedUser
+    | AddNewUser
+    | RemoveUser
+    | AddNewOrder
+    | AddCurrentRes
+    | RemoveOrder;

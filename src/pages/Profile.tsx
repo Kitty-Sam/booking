@@ -5,7 +5,6 @@ export const Profile = () => {
     return (
         <>
             <Header />
-            <div>Profile</div>
             <MainPanel />
         </>
     );

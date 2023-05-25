@@ -12,7 +12,9 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@store/*": ["src/store/*"],
       "@constants/*": ["src/constants/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"]
     },
 
     /* Bundler mode */

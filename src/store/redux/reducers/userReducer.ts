@@ -7,16 +7,27 @@ export interface IUser {
     password: string;
     phone: string;
 }
+
+export interface IOrder {
+    id: string;
+    dateAndTime: string;
+    quests: number;
+    tableNumber: number;
+}
 export interface IUserInitState {
     modal: 'login' | 'logout' | 'register' | 'profile' | null;
     currentUser: IUser;
     allUsers: IUser[];
+    orders: IOrder[];
+    currentRestaurant: string;
 }
 
 const initialState: IUserInitState = {
     modal: null,
     currentUser: {} as IUser,
     allUsers: [],
+    orders: [],
+    currentRestaurant: '',
 };
 
 export const userReducer = (state = initialState, action: ActionsType) => {
@@ -40,10 +51,32 @@ export const userReducer = (state = initialState, action: ActionsType) => {
             return { ...state, allUsers: [...state.allUsers, newUser] };
         }
 
+        case UserActions.ADD_NEW_ORDER: {
+            const { id, dateAndTime, quests, tableNumber } = action.payload;
+            const newOrder = {
+                id,
+                dateAndTime,
+                quests,
+                tableNumber,
+            };
+            return { ...state, orders: [...state.orders, newOrder] };
+        }
+
         case UserActions.REMOVE_USER: {
             const { id } = action.payload;
 
             return { ...state, allUsers: state.allUsers.filter((user) => user.id !== id) };
+        }
+
+        case UserActions.ADD_CURRENT_RESTAURANT: {
+            return { ...state, currentRestaurant: action.payload.currentRestaurant };
+        }
+
+        case UserActions.REMOVE_ORDER: {
+            const { id } = action.payload;
+            console.log('remove order');
+
+            return { ...state, orders: state.orders.filter((order) => order.id !== id) };
         }
 
         default:
