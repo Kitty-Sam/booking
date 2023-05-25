@@ -12,10 +12,21 @@
 }
 
 .buttonsWrapper {
-    width: 15%;
+    width: 25%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.pathName {
+    padding-left: 32px;
+}
+
+.avatar {
+    cursor: pointer;
+}
+
+.block {
+    display: flex
+}
 

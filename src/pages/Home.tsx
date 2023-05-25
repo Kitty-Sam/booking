@@ -1,26 +1,24 @@
 import { Header } from '@components/Header';
 import { Typography } from '@mui/material';
 import { restaurants } from '@constants/restaurants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCurrentRestaurant } from '@store/redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '@styles/Main.module.css';
-// import { persistor } from '@store/configureStore';
-// import { useEffect } from 'react';
+import { getCurrentUser } from '@store/redux/selectors';
 
 export const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     persistor.purge();
-    // });
-
     const onRestaurantPress = (title: string) => () => {
         dispatch(addCurrentRestaurant({ currentRestaurant: title }));
         navigate('/booking');
     };
+
+    const currentUser = useSelector(getCurrentUser);
+    console.log('currentUser', currentUser);
 
     return (
         <>

@@ -36,19 +36,17 @@ export const Header = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div style={{ display: 'flex' }}>
+            <div className={styles.block}>
                 <Menu />
-                <Typography variant="h6" style={{ paddingLeft: 32 }}>
+                <Typography variant="h6" className={styles.pathName}>
                     {getPathName(location.pathname)}: {currentRestaurant || ''}
                 </Typography>
             </div>
 
             {isLogged ? (
                 <div className={styles.buttonsWrapper}>
-                    <Typography variant="h6" className={styles.email}>
-                        {currentUser.email}
-                    </Typography>
-                    <Avatar onClick={onLogOutPress} />
+                    <Typography variant="h6">{currentUser.email}</Typography>
+                    <Avatar onClick={onLogOutPress} className={styles.avatar} />
                 </div>
             ) : (
                 <div className={styles.buttonsWrapper}>
