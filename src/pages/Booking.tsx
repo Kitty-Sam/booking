@@ -41,7 +41,9 @@ export const Booking = () => {
                     <>
                         <ProgressSteps activeStep={activeStep} setActiveStep={setActiveStep} />
                         {!currentRestaurant ? (
-                            <Typography variant="h4">Choose Restaurant name first</Typography>
+                            <Typography variant="h4" style={{ marginTop: 30 }}>
+                                Choose Restaurant name first
+                            </Typography>
                         ) : (
                             <div className={styles.mainBlock}>
                                 {activeStep === 1 && (

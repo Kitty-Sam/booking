@@ -71,7 +71,7 @@ export const Login = () => {
                     name="password"
                     label="Password"
                     value={formik.values.password}
-                    type="password"
+                    type={isVisible ? 'text' : 'password'}
                     onChange={formik.handleChange}
                     style={{ marginTop: 20 }}
                     helperText={formik.errors.password}
