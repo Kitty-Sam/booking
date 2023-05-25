@@ -1,5 +1,5 @@
 import { Header } from '@components/Header';
-import { TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { ProgressSteps } from '@components/ProgressSteps';
 import { CustomDatePicker } from '@components/DatePicker';
 import stylesButton from '@styles/ProgressSteps.module.css';
@@ -12,6 +12,7 @@ import { getCurrentRestaurant, getIsLogged } from '@store/redux/selectors';
 import { themeColors } from '@constants/themeColors';
 
 import styles from '@styles/Main.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Booking = () => {
     const [activeStep, setActiveStep] = useState(1);
@@ -29,14 +30,25 @@ export const Booking = () => {
         dateAndTime: startDate?.toString(),
     };
 
+    const navigate = useNavigate();
+
+    const onChooseRestaurantPress = () => {
+        navigate('/');
+    };
+
     return (
         <>
             <Header />
             <div className={styles.wrapper}>
                 {!isLoggedIn || !currentRestaurant ? (
-                    <Typography variant="h4" className={styles.typographyGap}>
-                        Register or Login first and Choose Restaurant name
-                    </Typography>
+                    <>
+                        <Typography variant="h4" className={styles.typographyGap}>
+                            Register or Login first and Choose Restaurant
+                        </Typography>
+                        <Button variant="contained" onClick={onChooseRestaurantPress}>
+                            Choose Restaurant
+                        </Button>
+                    </>
                 ) : (
                     <>
                         <ProgressSteps activeStep={activeStep} setActiveStep={setActiveStep} />
