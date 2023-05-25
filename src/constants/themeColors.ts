@@ -3,4 +3,5 @@ export const themeColors = {
     white: '#fff',
     lightWhite: '#f3e7f3',
     black: '#000',
+    grey: 'grey',
 };
