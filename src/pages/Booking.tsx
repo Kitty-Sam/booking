@@ -33,131 +33,121 @@ export const Booking = () => {
         <>
             <Header />
             <div className={styles.wrapper}>
-                {!isLoggedIn ? (
+                {!isLoggedIn || !currentRestaurant ? (
                     <Typography variant="h4" className={styles.typographyGap}>
-                        Register or Login first
+                        Register or Login first and Choose Restaurant name
                     </Typography>
                 ) : (
                     <>
                         <ProgressSteps activeStep={activeStep} setActiveStep={setActiveStep} />
-                        {!currentRestaurant ? (
-                            <Typography variant="h4" style={{ marginTop: 30 }}>
-                                Choose Restaurant name first
-                            </Typography>
-                        ) : (
-                            <div className={styles.mainBlock}>
-                                {activeStep === 1 && (
-                                    <>
-                                        <Typography variant="h4">Choose the Date</Typography>
-                                        <CustomDatePicker
-                                            startDate={startDate}
-                                            setStartDate={setStartDate}
-                                            isTime={false}
+                        <div className={styles.mainBlock}>
+                            {activeStep === 1 && (
+                                <>
+                                    <Typography variant="h4">Choose the Date</Typography>
+                                    <CustomDatePicker
+                                        startDate={startDate}
+                                        setStartDate={setStartDate}
+                                        isTime={false}
+                                    />
+                                    <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
+                                        <ControlBar
+                                            setActiveStep={setActiveStep}
+                                            activeStep={activeStep}
+                                            compareValue={1}
+                                            prevLabel={'Previous'}
+                                            nextLabel={'Next'}
+                                            filters={payload}
                                         />
-                                        <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
-                                            <ControlBar
-                                                setActiveStep={setActiveStep}
-                                                activeStep={activeStep}
-                                                compareValue={1}
-                                                prevLabel={'Previous'}
-                                                nextLabel={'Next'}
-                                                filters={payload}
-                                            />
-                                        </div>
-                                    </>
-                                )}
-                                {activeStep === 2 && (
-                                    <>
-                                        <Typography variant="h4">Choose the Time</Typography>
-                                        <CustomDatePicker
-                                            startDate={startDate}
-                                            setStartDate={setStartDate}
-                                            isTime={true}
+                                    </div>
+                                </>
+                            )}
+                            {activeStep === 2 && (
+                                <>
+                                    <Typography variant="h4">Choose the Time</Typography>
+                                    <CustomDatePicker startDate={startDate} setStartDate={setStartDate} isTime={true} />
+                                    <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
+                                        <ControlBar
+                                            setActiveStep={setActiveStep}
+                                            activeStep={activeStep}
+                                            compareValue={2}
+                                            prevLabel={'Previous'}
+                                            nextLabel={'Next'}
+                                            filters={payload}
                                         />
-                                        <div className={`${stylesButton.buttonsContainer} ${styles.controlBarGap}`}>
-                                            <ControlBar
-                                                setActiveStep={setActiveStep}
-                                                activeStep={activeStep}
-                                                compareValue={2}
-                                                prevLabel={'Previous'}
-                                                nextLabel={'Next'}
-                                                filters={payload}
-                                            />
-                                        </div>
-                                    </>
-                                )}
+                                    </div>
+                                </>
+                            )}
 
-                                {activeStep === 3 && (
-                                    <>
-                                        <Typography variant="h4">Enter Guests number</Typography>
-                                        <div className={styles.tablesWrapper}>
-                                            {tables.map((table) => {
-                                                const array = new Array(table.capacity).fill('available');
-                                                const seats = array.fill('reserved', 3);
+                            {activeStep === 3 && (
+                                <>
+                                    <Typography variant="h4">Enter Guests number</Typography>
+                                    <div className={styles.tablesWrapper}>
+                                        {tables.map((table) => {
+                                            const array = new Array(table.capacity).fill('available');
+                                            const seats = array.fill('reserved', 3);
 
-                                                return (
-                                                    <div key={table.id}>
-                                                        <div>№ {table.id}</div>
-                                                        <div className={stylesTable.table}>
-                                                            {seats.map((seat, index) => (
-                                                                <div
-                                                                    key={index}
-                                                                    className={styles.placeWrapper}
-                                                                    style={{
-                                                                        backgroundColor:
-                                                                            seat === 'reserved'
-                                                                                ? themeColors.grey
-                                                                                : 'inherit',
-                                                                    }}
-                                                                />
-                                                            ))}
-                                                        </div>
+                                            return (
+                                                <div key={table.id}>
+                                                    <div>№ {table.id}</div>
+                                                    <div className={stylesTable.table}>
+                                                        {seats.map((seat, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className={styles.placeWrapper}
+                                                                style={{
+                                                                    backgroundColor:
+                                                                        seat === 'reserved'
+                                                                            ? themeColors.grey
+                                                                            : 'inherit',
+                                                                }}
+                                                            />
+                                                        ))}
                                                     </div>
-                                                );
-                                            })}
-                                        </div>
-                                        <div className={styles.historyWrapper}>
-                                            <div className={styles.history} />
-                                            <Typography variant="h6">Reserved</Typography>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                    <div className={styles.historyWrapper}>
+                                        <div className={styles.history} />
+                                        <Typography variant="h6">Reserved</Typography>
 
-                                            <div className={styles.historyWhite} />
-                                            <Typography variant="h6">Available</Typography>
-                                        </div>
+                                        <div className={styles.historyWhite} />
+                                        <Typography variant="h6">Available</Typography>
+                                    </div>
 
-                                        <TextField
-                                            id="outlined-controlled"
-                                            label="Guests number"
-                                            value={quests}
-                                            style={{ marginBottom: 30 }}
-                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                setGuests(event.target.value);
-                                            }}
+                                    <TextField
+                                        id="outlined-controlled"
+                                        label="Guests number"
+                                        value={quests}
+                                        style={{ marginBottom: 30 }}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                            setGuests(event.target.value);
+                                        }}
+                                    />
+
+                                    <TextField
+                                        id="outlined-controlled"
+                                        label="Table number"
+                                        value={table}
+                                        style={{ marginBottom: 30 }}
+                                        className={styles.inputGap}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                            setTable(event.target.value);
+                                        }}
+                                    />
+                                    <div className={styles.bookBlock}>
+                                        <ControlBar
+                                            setActiveStep={setActiveStep}
+                                            activeStep={activeStep}
+                                            compareValue={3}
+                                            prevLabel={'Previous'}
+                                            nextLabel={'Book'}
+                                            filters={payload}
                                         />
-
-                                        <TextField
-                                            id="outlined-controlled"
-                                            label="Table number"
-                                            value={table}
-                                            style={{ marginBottom: 30 }}
-                                            className={styles.inputGap}
-                                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                                setTable(event.target.value);
-                                            }}
-                                        />
-                                        <div className={styles.bookBlock}>
-                                            <ControlBar
-                                                setActiveStep={setActiveStep}
-                                                activeStep={activeStep}
-                                                compareValue={3}
-                                                prevLabel={'Previous'}
-                                                nextLabel={'Book'}
-                                                filters={payload}
-                                            />
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        )}
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </>
                 )}
             </div>
