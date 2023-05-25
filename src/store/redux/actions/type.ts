@@ -6,6 +6,7 @@ export enum UserActions {
     ADD_CURRENT_RESTAURANT = 'ADD_CURRENT_RESTAURANT',
     REMOVE_USER = 'REMOVE_USER',
     REMOVE_ORDER = 'REMOVE_ORDER',
+    FETCH_ORDERS = 'FETCH_ORDERS',
 }
 
 export enum AuthActions {

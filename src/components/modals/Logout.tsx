@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { setIsLoggedUser, setModal } from '@store/redux/actions/actions';
+import { addCurrentRestaurant, fetchOrders, setIsLoggedUser, setModal } from '@store/redux/actions/actions';
 import { useDispatch } from 'react-redux';
 import styles from '@styles/Login.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,9 @@ export const Logout = () => {
 
     const onLogOutModalPress = () => {
         dispatch(setIsLoggedUser({ isLogged: false }));
+        dispatch(addCurrentRestaurant({ currentRestaurant: '' }));
         dispatch(setModal({ modal: null }));
+        dispatch(fetchOrders({ orders: [] }));
         navigate('/');
     };
 

@@ -1,5 +1,5 @@
 import { AuthActions, UserActions } from '@store/redux/actions/type';
-import { IUser } from '@store/redux/reducers/userReducer';
+import { IOrder, IUser } from '@store/redux/reducers/userReducer';
 
 export interface SetModalPayload {
     modal: 'login' | 'logout' | 'register' | 'profile' | null;
@@ -79,6 +79,15 @@ export type RemoveOrder = {
     payload: RemoveOrderPayload;
 };
 
+export interface FetchOrdersPayload {
+    orders: IOrder[];
+}
+
+export type FetchOrders = {
+    type: typeof UserActions.FETCH_ORDERS;
+    payload: FetchOrdersPayload;
+};
+
 export type ActionsType =
     | SetModal
     | SetCurrentUser
@@ -87,4 +96,5 @@ export type ActionsType =
     | RemoveUser
     | AddNewOrder
     | AddCurrentRes
-    | RemoveOrder;
+    | RemoveOrder
+    | FetchOrders;

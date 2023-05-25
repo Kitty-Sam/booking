@@ -74,9 +74,11 @@ export const userReducer = (state = initialState, action: ActionsType) => {
 
         case UserActions.REMOVE_ORDER: {
             const { id } = action.payload;
-            console.log('remove order');
-
             return { ...state, orders: state.orders.filter((order) => order.id !== id) };
+        }
+
+        case UserActions.FETCH_ORDERS: {
+            return { ...state, orders: action.payload.orders };
         }
 
         default:

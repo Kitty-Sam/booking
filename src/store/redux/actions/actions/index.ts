@@ -2,6 +2,7 @@ import {
     AddCurrentResPayload,
     AddNewOrderPayload,
     AddNewUserPayload,
+    FetchOrdersPayload,
     RemoveOrderPayload,
     RemoveUserPayload,
     SetCurrentUserPayload,
@@ -46,5 +47,10 @@ export const addCurrentRestaurant = (payload: AddCurrentResPayload) => ({
 
 export const removeOrder = (payload: RemoveOrderPayload) => ({
     type: UserActions.REMOVE_ORDER,
+    payload,
+});
+
+export const fetchOrders = (payload: FetchOrdersPayload) => ({
+    type: UserActions.FETCH_ORDERS,
     payload,
 });
