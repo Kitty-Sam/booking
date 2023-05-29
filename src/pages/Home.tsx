@@ -1,4 +1,3 @@
-import { Header } from '@components/Header';
 import { Typography } from '@mui/material';
 import { restaurants } from '@constants/restaurants';
 import { useDispatch } from 'react-redux';
@@ -6,6 +5,7 @@ import { addCurrentRestaurant } from '@store/redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '@styles/Main.module.css';
+import { MainLayout } from '@components/MainLayout';
 
 export const Home = () => {
     const dispatch = useDispatch();
@@ -17,8 +17,7 @@ export const Home = () => {
     };
 
     return (
-        <>
-            <Header />
+        <MainLayout>
             <div className={styles.wrapper}>
                 <Typography variant="h4">Choose your restaurant</Typography>
                 <div className={styles.restaurantWrapper}>
@@ -34,6 +33,6 @@ export const Home = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </MainLayout>
     );
 };

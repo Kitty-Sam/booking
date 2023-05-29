@@ -1,4 +1,3 @@
-import { Header } from '@components/Header';
 import { Button, TextField, Typography } from '@mui/material';
 import { ProgressSteps } from '@components/ProgressSteps';
 import { CustomDatePicker } from '@components/DatePicker';
@@ -13,19 +12,23 @@ import { themeColors } from '@constants/themeColors';
 
 import styles from '@styles/Main.module.css';
 import { useNavigate } from 'react-router-dom';
+import { MainLayout } from '@components/MainLayout';
+import { ISeat, seat, SeatType } from '@constants/seats';
+import { toast } from 'react-toastify';
+import { successOptions } from '@constants/toastOptions';
 
 export const Booking = () => {
     const [activeStep, setActiveStep] = useState(1);
-    const [quests, setGuests] = useState<string>('1');
     const [table, setTable] = useState<string>('1');
     const [startDate, setStartDate] = useState<Date | null>(new Date());
+    const [seatPressed, setSeatPressed] = useState<Array<string>>([]);
 
     const isLoggedIn = useSelector(getIsLogged);
     const currentRestaurant = useSelector(getCurrentRestaurant);
 
     const payload = {
         id: Date.now().toString(),
-        quests: Number(quests),
+        quests: seatPressed.length,
         tableNumber: Number(table),
         dateAndTime: startDate?.toString(),
     };
@@ -36,9 +39,17 @@ export const Booking = () => {
         navigate('/');
     };
 
+    const onSeatClick = (id: string, type: SeatType) => () => {
+        if (type === SeatType.RESERVED) {
+            // @ts-ignore
+            toast.info('Please, choose another one, this place is reserved', successOptions);
+            return;
+        }
+        setSeatPressed((prev) => (prev.includes(id) ? prev.filter((el) => el !== id) : prev.concat(id)));
+    };
+
     return (
-        <>
-            <Header />
+        <MainLayout>
             <div className={styles.wrapper}>
                 {!isLoggedIn || !currentRestaurant ? (
                     <>
@@ -95,24 +106,33 @@ export const Booking = () => {
                                     <Typography variant="h4">Enter Guests number</Typography>
                                     <div className={styles.tablesWrapper}>
                                         {tables.map((table) => {
-                                            const array = new Array(table.capacity).fill('available');
-                                            const seats = array.fill('reserved', 3);
+                                            // @ts-ignore
+                                            const seats = new Array(table.capacity).fill(seat).map((el: ISeat, i) => {
+                                                return {
+                                                    el: i > 3 ? SeatType.RESERVED : SeatType.AVAILABLE,
+                                                    id: (table.id + i).toString(),
+                                                };
+                                            });
 
                                             return (
                                                 <div key={table.id}>
                                                     <div>№ {table.id}</div>
                                                     <div className={stylesTable.table}>
                                                         {seats.map((seat, index) => (
-                                                            <div
+                                                            <button
+                                                                onClick={onSeatClick(seat.id, seat.el)}
                                                                 key={index}
                                                                 className={styles.placeWrapper}
                                                                 style={{
-                                                                    backgroundColor:
-                                                                        seat === 'reserved'
-                                                                            ? themeColors.grey
-                                                                            : 'inherit',
+                                                                    backgroundColor: seatPressed.includes(seat.id)
+                                                                        ? themeColors.yellow
+                                                                        : seat.el === SeatType.RESERVED
+                                                                        ? themeColors.grey
+                                                                        : 'inherit',
                                                                 }}
-                                                            />
+                                                            >
+                                                                {index + 1}
+                                                            </button>
                                                         ))}
                                                     </div>
                                                 </div>
@@ -123,19 +143,12 @@ export const Booking = () => {
                                         <div className={styles.history} />
                                         <Typography variant="h6">Reserved</Typography>
 
+                                        <div className={styles.historyYellow} />
+                                        <Typography variant="h6">Selected</Typography>
+
                                         <div className={styles.historyWhite} />
                                         <Typography variant="h6">Available</Typography>
                                     </div>
-
-                                    <TextField
-                                        id="outlined-controlled"
-                                        label="Guests number"
-                                        value={quests}
-                                        style={{ marginBottom: 30 }}
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                            setGuests(event.target.value);
-                                        }}
-                                    />
 
                                     <TextField
                                         id="outlined-controlled"
@@ -163,6 +176,6 @@ export const Booking = () => {
                     </>
                 )}
             </div>
-        </>
+        </MainLayout>
     );
 };

@@ -42,6 +42,7 @@
     border-color: #000;
     border-width: 1px;
     border-style: solid;
+    cursor: pointer;
 }
 
 
@@ -61,6 +62,16 @@
     border-width: 1px;
     border-style: solid;
     background-color: var(--primary-white-color);
+    margin: 10px;
+}
+
+.historyYellow {
+    width: 25px;
+    height: 25px;
+    border-color: var(--primary-black-color);
+    border-width: 1px;
+    border-style: solid;
+    background-color: var(--primary-yellow-color);
     margin: 10px;
 }
 

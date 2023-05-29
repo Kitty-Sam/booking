@@ -59,19 +59,12 @@ export const Slider: FC<ISliderProps> = ({ orders, date }) => {
                 &lt;
             </Button>
             <div className={styles.itemsContainer}>
-                {filteredOrders.map(({ quests, dateAndTime, id }, index) => (
+                {filteredOrders.map(({ quests, dateAndTime, id, tableNumber }, index) => (
                     <div className={styles.item} key={index}>
                         <div>{moment(dateAndTime).format('DD.MM.YYYY, h:mm A')}</div>
+                        <div>table № is {tableNumber}</div>
                         <div>{quests} people</div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-around',
-                                marginTop: 20,
-                                width: '100%',
-                            }}
-                        >
+                        <div className={styles.buttonsBlock}>
                             <Button
                                 variant="contained"
                                 onClick={!isPressed ? onEditPress : onCancelBookPress(id, dateAndTime)}
