@@ -15,7 +15,7 @@ export const Profile = () => {
         <MainLayout>
             <div className={styles.wrapper}>
                 {!orders.length ? (
-                    <Typography variant="h4">Hear is going to be your booked tables</Typography>
+                    <Typography variant="h4">Here is going to be your booked tables</Typography>
                 ) : (
                     <>
                         <Typography variant="h4">Current booking</Typography>
